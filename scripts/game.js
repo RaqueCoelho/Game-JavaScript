@@ -10,10 +10,12 @@ class Game {
     this.points = [];
     this.keyboard = new Keyboard(this);
     this.keyboard.setKeyboard();
+    this.scoreBoard = new Scoreboard(this);
+    console.log(this.obstacles);
   }
 
   startGame() {
-    console.log('game has started');
+    //console.log('game has started');
     this.fillArrays();
     this.drawEverything();
     this.loop();
@@ -29,7 +31,6 @@ class Game {
       const point = new Points(this, i * -200);
       this.points.push(point);
     }
-    console.log('arrays filled', this.points);
   }
 
   runLogic() {
@@ -43,16 +44,16 @@ class Game {
   }
 
   drawEverything() {
-    console.log('drawing game');
     this.context.clearRect(0, 0, this.width, this.height);
     this.background.draw();
+    this.doll.drawDoll();
+    this.scoreBoard.paint();
     for (let obstacle of this.obstacles) {
       obstacle.drawobstacle();
     }
     for (let point of this.points) {
       point.drawpoints();
     }
-    this.doll.drawDoll();
   }
 
   loop = timestamp => {

@@ -48,10 +48,11 @@ class Points {
       dollY < pointsY + pointsHeight
     ) {
       //gameIsRunning = false;
+      //console.log('there was a colission with a point');
       let index = this.game.points.indexOf(this);
       this.game.points.splice(index, 1);
-      this.game.doll.score++;
-      console.log(this.game.doll.score);
+      this.game.scoreBoard.addScore();
+      //console.log(this.game.doll.score);
     }
   }
 }

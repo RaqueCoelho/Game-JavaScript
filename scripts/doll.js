@@ -4,15 +4,15 @@ class CharacterDoll {
     this.col = 300;
     this.width = 350;
     this.height = 250;
-    this.row = 900;
-    this.score = 0;
+    this.row = 450;
     this.image = new Image();
     this.imageUrl = './images/hiclipart.com.png';
+    this.score = 0;
   }
 
   moveRight() {
     this.col += 50;
-    console.log('right');
+    //console.log('right');
   }
 
   moveLeft() {

@@ -10,11 +10,11 @@ class Keyboard {
       switch (event.keyCode) {
         case 37:
           this.game.doll.moveLeft();
-          console.log('left');
+          //console.log('left');
           break;
         case 39:
           this.game.doll.moveRight();
-          console.log('right');
+          //console.log('right');
           break;
       }
     });

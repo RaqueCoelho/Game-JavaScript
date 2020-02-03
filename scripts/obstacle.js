@@ -2,7 +2,7 @@
 class Obstacle {
   constructor(game, posY) {
     this.game = game;
-    this.posX = 100 + Math.random() * (this.game.context.width - 200) + 5;
+    this.posX = 100 + Math.random() * (this.game.context.canvas.width - 200) + 5;
     this.posY = posY;
     this.width = 100;
     this.height = 130;
@@ -19,12 +19,13 @@ class Obstacle {
 
   runLogic() {
     this.posY += 3;
+    //console.log(this.posX, this.posY);
     this.checkCollision();
   }
 
   setRandomPosition() {
     this.posY = Math.random() * 100;
-    this.posX = 100 + Math.random() * (context.canvas.width - 200) + 5;
+    this.posX = 100 + Math.random() * (this.game.context.canvas.width - 200) + 5;
   }
 
   checkCollision() {
@@ -45,10 +46,10 @@ class Obstacle {
       dollY < obstacleY + obstacleHeight
     ) {
       //gameIsRunning = false;
+      console.log('there was a colission with an obstacle');
       let index = this.game.obstacles.indexOf(this);
       this.game.obstacles.splice(index, 1);
-      this.game.doll.score--;
-      console.log(this.game.doll.score);
+      this.game.scoreBoard.takeScore();
     }
   }
 }
