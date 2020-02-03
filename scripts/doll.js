@@ -1,28 +1,26 @@
 class CharacterDoll {
-  constructor(row) {
-    this.row = row;
-    this.width = 250;
+  constructor(game) {
+    this.game = game;
+    this.col = 300;
+    this.width = 350;
     this.height = 250;
-    this.col = 7;
+    this.row = 900;
     this.score = 0;
+    this.image = new Image();
+    this.imageUrl = './images/hiclipart.com.png';
   }
 
   moveRight() {
-    this.col++;
+    this.col += 50;
     console.log('right');
   }
 
   moveLeft() {
-    this.col--;
+    this.col -= 50;
   }
 
   drawDoll() {
-    const image = new Image();
-    const imageUrl = '/images/hiclipart.com.png';
-    image.src = imageUrl;
-
-    context.drawImage(image, this.col * GRID_SIZE, this.row * GRID_SIZE, this.width, this.height);
+    this.image.src = this.imageUrl;
+    this.game.context.drawImage(this.image, this.col, this.row, this.width, this.height);
   }
 }
-
-const doll = new CharacterDoll(18.5);

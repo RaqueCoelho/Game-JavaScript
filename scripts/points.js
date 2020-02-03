@@ -1,6 +1,7 @@
 class Points {
-  constructor(posY) {
-    this.posX = 100 + Math.random() * (context.canvas.width - 200) + 5;
+  constructor(game, posY) {
+    this.game = game;
+    this.posX = 100 + Math.random() * (this.game.context.canvas.width - 200) + 5;
     this.posY = posY;
     this.width = 100;
     this.height = 130;
@@ -16,7 +17,7 @@ class Points {
       image.src =
         './images/kisspng-bell-clip-art-bell-png-vector-element-5aa62d3a4a8459.8830207115208399943052.png';
     else if (this.randNumber % 2 === 0) image.src = '/images/pngwave.png';
-    context.drawImage(image, this.posX, this.posY, this.width, this.height);
+    this.game.context.drawImage(image, this.posX, this.posY, this.width, this.height);
   }
 
   runLogic() {
@@ -26,14 +27,14 @@ class Points {
 
   setRandomPosition() {
     this.posY = Math.random() * 100;
-    this.posX = 100 + Math.random() * (context.canvas.width - 200) + 5;
+    this.posX = 100 + Math.random() * (this.game.context.canvas.width - 200) + 5;
   }
 
   checkCollision() {
-    const dollX = doll.col * GRID_SIZE;
-    const dollY = doll.row * GRID_SIZE;
-    const dollWidth = doll.width;
-    const dollHeight = doll.height;
+    const dollX = this.game.doll.col;
+    const dollY = this.game.doll.row;
+    const dollWidth = this.game.doll.width;
+    const dollHeight = this.game.doll.height;
 
     const pointsX = this.posX;
     const pointsY = this.posY;
@@ -47,25 +48,10 @@ class Points {
       dollY < pointsY + pointsHeight
     ) {
       //gameIsRunning = false;
-      let index = points.indexOf(this);
-      points.splice(index, 1);
-      doll.score++;
-      console.log(doll.score);
+      let index = this.game.points.indexOf(this);
+      this.game.points.splice(index, 1);
+      this.game.doll.score++;
+      console.log(this.game.doll.score);
     }
   }
 }
-
-// Make the points disappeur after touching the girl
-const points = [];
-
-for (let i = 0; i < 100; i++) {
-  const point = new Points(i * -200);
-  points.push(point);
-}
-
-// Point logic
-const runLogicPoints = () => {
-  for (let point of points) {
-    point.runLogic();
-  }
-};
