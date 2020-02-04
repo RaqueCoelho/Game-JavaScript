@@ -6,52 +6,51 @@ class Game {
     this.height = $canvas.height;
     this.context = $canvas.getContext('2d');
     this.background = new Background(this);
-    this.gameIsRunning = true;
-    this.doll = new CharacterDoll(this);
-    this.obstacles = [];
-    this.points = [];
-    this.keyboard = new Keyboard(this);
-    this.keyboard.setKeyboard();
-    this.scoreBoard = new Scoreboard(this);
-    this.timer = new Timer();
+    this.time = 0;
+    this.speed = 1000;
   }
 
   startGame() {
-    // this.restartGame();
+    this.restartGame();
     this.loop();
-    this.timer.setTimer();
-
-    this.fillArrays();
-    this.drawEverything();
   }
 
   restartGame() {
+    this.gameIsRunning = true;
+
+    this.timer = new Timer(this);
     this.timer.setTimer();
 
-    console.log('restarting');
+    this.doll = new CharacterDoll(this);
+    this.keyboard = new Keyboard(this);
+    this.scoreBoard = new Scoreboard(this);
+    this.scoreBoard.clearScore();
+
     this.obstacles = [];
     this.points = [];
-    this.scoreBoard.clearScore();
-    this.startGame();
+    this.keyboard.setKeyboard();
   }
 
   pauseGame() {
     this.gameIsRunning = !this.gameIsRunning;
   }
 
-  fillArrays() {
-    for (let i = 0; i < 100; i++) {
-      const obstacles = new Obstacle(this, i * -200);
+  fillArrays(timestamp) {
+    //Everything runnning inside this condition runs at the speed of the game this.speed
+    if (this.time < timestamp - this.speed) {
+      this.time = timestamp;
+      //This pushes an obstacle to the array every this.speed seconds
+      const obstacles = new Obstacle(this, 0);
       this.obstacles.push(obstacles);
-    }
-
-    for (let i = 0; i < 100; i++) {
-      const point = new Points(this, i * -200);
+      //   console.log(this.obstacles.length);
+      const point = new Points(this, 0);
       this.points.push(point);
     }
   }
 
-  runLogic() {
+  runLogic(timestamp) {
+    this.fillArrays(timestamp);
+
     for (let point of this.points) {
       point.runLogic();
     }
@@ -59,10 +58,13 @@ class Game {
     for (let obstacle of this.obstacles) {
       obstacle.runLogic();
     }
+    sleepMusic.loop = true;
+    sleepMusic.play();
   }
 
   drawEverything() {
     this.context.clearRect(0, 0, this.width, this.height);
+
     this.background.draw();
     this.doll.drawDoll();
     this.scoreBoard.paint();
@@ -72,13 +74,11 @@ class Game {
     for (let point of this.points) {
       point.drawpoints();
     }
-    sleepMusic.loop = true;
-    sleepMusic.play();
   }
 
   loop = timestamp => {
     this.drawEverything();
-    this.runLogic();
+    this.runLogic(timestamp);
     if (this.gameIsRunning) {
       window.requestAnimationFrame(timestamp => this.loop(timestamp));
     }

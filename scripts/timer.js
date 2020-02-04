@@ -1,14 +1,22 @@
 class Timer {
   constructor(game) {
     this.game = game;
+    this.timeToLoose = 30;
+    // this.$timer = document.getElementById('timer-countdown').textContent;
   }
 
   setTimer() {
-    let seconds = document.getElementById('timer-countdown').textContent;
-    let countdown = setInterval(function() {
-      seconds--;
-      document.getElementById('timer-countdown').textContent = seconds;
-      if (seconds <= 0) clearInterval(countdown);
+    let countdown = setInterval(() => {
+      // console.log('countdown');
+      this.timeToLoose--;
+      document.getElementById('timer-countdown').textContent = this.timeToLoose;
+      if (this.timeToLoose <= 0) {
+        this.timeToLoose = 30;
+        this.game.pauseGame();
+        alert(`TIMES'S UP. YOUR SCORE IS ${this.game.doll.score}. CLICK START TO PLAY AGAIN`);
+        document.location.reload();
+        clearInterval(countdown);
+      }
     }, 1000);
   }
 }

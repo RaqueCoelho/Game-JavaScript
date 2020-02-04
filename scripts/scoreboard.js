@@ -4,7 +4,7 @@ const wakeupAudio = new Audio('./Audio/bocejo (online-audio-converter.com).mp3')
 class Scoreboard {
   constructor(game) {
     this.game = game;
-
+    this.score = 0;
     this.$scoreSpan = document.querySelector('.score');
     //console.dir(this.$scoreSpan);
   }

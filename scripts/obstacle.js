@@ -5,8 +5,8 @@ class Obstacle {
     this.game = game;
     this.posX = 100 + Math.random() * (this.game.context.canvas.width - 200) + 5;
     this.posY = posY;
-    this.width = 100;
-    this.height = 130;
+    this.width = 50;
+    this.height = 50;
     this.randNumber = Math.floor(Math.random() * 100);
   }
 

@@ -7,7 +7,6 @@ class CharacterDoll {
     this.row = 650;
     this.image = new Image();
     this.imageUrl = './images/hiclipart.com.png';
-    this.score = 0;
   }
 
   moveRight() {
