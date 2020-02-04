@@ -1,3 +1,5 @@
+const sleepMusic = new Audio('./Audio/sleep_audio.mp3');
+
 class Game {
   constructor($canvas) {
     this.width = $canvas.width;
@@ -11,14 +13,30 @@ class Game {
     this.keyboard = new Keyboard(this);
     this.keyboard.setKeyboard();
     this.scoreBoard = new Scoreboard(this);
-    console.log(this.obstacles);
+    this.timer = new Timer();
   }
 
   startGame() {
-    //console.log('game has started');
+    // this.restartGame();
+    this.loop();
+    this.timer.setTimer();
+
     this.fillArrays();
     this.drawEverything();
-    this.loop();
+  }
+
+  restartGame() {
+    this.timer.setTimer();
+
+    console.log('restarting');
+    this.obstacles = [];
+    this.points = [];
+    this.scoreBoard.clearScore();
+    this.startGame();
+  }
+
+  pauseGame() {
+    this.gameIsRunning = !this.gameIsRunning;
   }
 
   fillArrays() {
@@ -54,6 +72,8 @@ class Game {
     for (let point of this.points) {
       point.drawpoints();
     }
+    sleepMusic.loop = true;
+    sleepMusic.play();
   }
 
   loop = timestamp => {

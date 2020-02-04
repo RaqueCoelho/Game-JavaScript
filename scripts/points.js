@@ -4,7 +4,7 @@ class Points {
     this.posX = 100 + Math.random() * (this.game.context.canvas.width - 200) + 5;
     this.posY = posY;
     this.width = 100;
-    this.height = 130;
+    this.height = 100;
     this.randNumber = Math.floor(Math.random() * 100);
   }
 
@@ -48,7 +48,7 @@ class Points {
       dollY < pointsY + pointsHeight
     ) {
       //gameIsRunning = false;
-      //console.log('there was a colission with a point');
+      console.log('there was a colission with a point');
       let index = this.game.points.indexOf(this);
       this.game.points.splice(index, 1);
       this.game.scoreBoard.addScore();

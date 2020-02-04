@@ -5,21 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Wake up the Ironhacker Girl</title>
   </head>
   <body>
-    <div class="game-intro">
-      <img src="./images/Captura de ecrã 2020-02-02, às 12.43.44.png" alt="" class="logo-img" />
-      <br />
+    <section class="left-side">
+      <div class="game-intro">
+        <img src="./images/ironhackgirl.jpg" alt="" class="logo-img" />
+        <br />
+        <button id="start-button">START</button>
+        <button id="restart-button">RESTART</button>
+        <button id="pause-button">PAUSE</button>
 
-      <button id="start-button">Start to wake me</button>
-      <p>Use the left and right arrow to control the doll!</p>
-      <img src="./images/arrows.png" alt="" class="arrows-img" />
-    </div>
-    <h1>Score: <span class="score">0</span></h1>
-    <div id="game-board">
+        <p>Use the left and right arrow to control the doll!</p>
+        <img src="./images/arrows.png" alt="" class="arrows-img" />
+      </div>
+      <h2>Score: <span class="score">0</span></h2>
+      <div id="game-board"></div>
+      <h2>Timer:<span id="timer-countdown">10</span></h2>
+    </section>
+    <section class="right-side">
       <canvas width="900" height="900"></canvas>
-    </div>
+    </section>
     <script src="scripts/doll.js"></script>
     <script src="scripts/background.js"></script>
     <script src="scripts/obstacle.js"></script>
@@ -27,6 +33,7 @@
     <script src="scripts/variable.js"></script>
     <script src="scripts/keyboard.js"></script>
     <script src="scripts/scoreboard.js"></script>
+    <script src="scripts/timer.js"></script>
     <script src="scripts/game.js"></script>
     <script src="scripts/script.js"></script>
   </body>

@@ -1,4 +1,5 @@
 // Class object
+
 class Obstacle {
   constructor(game, posY) {
     this.game = game;
@@ -45,8 +46,6 @@ class Obstacle {
       dollY + dollHeight > obstacleY &&
       dollY < obstacleY + obstacleHeight
     ) {
-      //gameIsRunning = false;
-      console.log('there was a colission with an obstacle');
       let index = this.game.obstacles.indexOf(this);
       this.game.obstacles.splice(index, 1);
       this.game.scoreBoard.takeScore();
