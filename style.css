@@ -65,7 +65,7 @@ body button {
   box-shadow: 0;
   border-radius: 5px;
   margin-right: 20px;
-  max-width: 35%;
+  max-width: 50%;
 }
 
 canvas {
@@ -76,5 +76,5 @@ canvas {
   border-radius: 5px;
   margin-bottom: 20px;
   margin-right: 20px;
-  max-width: 65%;
+  max-width: 50%;
 }
