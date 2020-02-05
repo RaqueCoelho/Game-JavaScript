@@ -20,6 +20,7 @@ class Obstacle {
 
   runLogic() {
     this.posY += 3;
+    this.checkCollision();
     //console.log(this.posX, this.posY);
   }
 

@@ -1,3 +1,6 @@
+const snoreAudio = new Audio('./Audio/snore_audio.mp3');
+const wakeupAudio = new Audio('./Audio/rooster.mp3');
+
 class Scoreboard {
   constructor(game) {
     this.game = game;
@@ -8,10 +11,12 @@ class Scoreboard {
 
   addScore() {
     this.score += 1;
+    wakeupAudio.play();
   }
 
   takeScore() {
     this.score -= 1;
+    snoreAudio.play();
   }
 
   clearScore() {
