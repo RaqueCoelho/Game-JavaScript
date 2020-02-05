@@ -8,11 +8,32 @@ class Game {
     this.background = new Background(this);
     this.time = 0;
     this.speed = 1000;
+    this.gameIsRunning = false;
+
+    this.timer = new Timer(this);
+    this.timer.setTimer();
+    this.doll = new CharacterDoll(this);
+    this.keyboard = new Keyboard(this);
+    this.scoreBoard = new Scoreboard(this);
+    this.scoreBoard.clearScore();
+    this.keyboard.setKeyboard();
+    this.obstacles = [];
+    this.points = [];
+    this.gameHasStarted = false;
   }
 
   startGame() {
-    this.restartGame();
-    this.loop();
+    if (this.gameHasStarted) {
+      this.restartGame();
+    } else {
+      this.gameIsRunning = true;
+      this.gameHasStarted = true;
+      if (!this.animationID) {
+        this.loop();
+      }
+      sleepMusic.loop = true;
+      sleepMusic.play();
+    }
   }
 
   restartGame() {
@@ -20,6 +41,7 @@ class Game {
 
     this.timer = new Timer(this);
     this.timer.setTimer();
+    //this.timer.timeToLoose = 30;
 
     this.doll = new CharacterDoll(this);
     this.keyboard = new Keyboard(this);
@@ -29,10 +51,21 @@ class Game {
     this.obstacles = [];
     this.points = [];
     this.keyboard.setKeyboard();
+    this.time = 0;
   }
 
   pauseGame() {
-    this.gameIsRunning = !this.gameIsRunning;
+    if (this.gameIsRunning) {
+      this.gameIsRunning = !this.gameIsRunning;
+      document.getElementById('pause-button').innerText = 'RESUME';
+    } else {
+      this.gameIsRunning = !this.gameIsRunning;
+      document.getElementById('pause-button').innerText = 'PAUSE';
+      this.loop();
+    }
+    sleepMusic.pause();
+
+    //console.log(sleepMusic.paused);
   }
 
   fillArrays(timestamp) {
@@ -58,8 +91,6 @@ class Game {
     for (let obstacle of this.obstacles) {
       obstacle.runLogic();
     }
-    sleepMusic.loop = true;
-    sleepMusic.play();
   }
 
   drawEverything() {
@@ -80,7 +111,7 @@ class Game {
     this.drawEverything();
     this.runLogic(timestamp);
     if (this.gameIsRunning) {
-      window.requestAnimationFrame(timestamp => this.loop(timestamp));
+      this.animationID = window.requestAnimationFrame(timestamp => this.loop(timestamp));
     }
   };
 }

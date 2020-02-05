@@ -10,21 +10,21 @@ class Scoreboard {
   }
 
   addScore() {
-    this.game.doll.score += 1;
+    this.score += 1;
     wakeupAudio.play();
   }
 
   takeScore() {
-    this.game.doll.score -= 1;
+    this.score -= 1;
     snoreAudio.play();
   }
 
   clearScore() {
-    this.game.doll.score = 0;
+    this.score = 0;
   }
 
   paint() {
-    const scoreText = this.game.doll.score;
+    const scoreText = this.score;
     this.$scoreSpan.innerText = scoreText;
   }
 }

@@ -8,12 +8,15 @@ class Timer {
   setTimer() {
     let countdown = setInterval(() => {
       // console.log('countdown');
-      this.timeToLoose--;
+      if (this.game.gameIsRunning) {
+        this.timeToLoose--;
+      }
+      console.log(this.timeToLoose);
       document.getElementById('timer-countdown').textContent = this.timeToLoose;
       if (this.timeToLoose <= 0) {
         this.timeToLoose = 30;
         this.game.pauseGame();
-        alert(`TIMES'S UP. YOUR SCORE IS ${this.game.doll.score}. CLICK START TO PLAY AGAIN`);
+        alert(`TIMES'S UP. YOUR SCORE IS ${this.game.scoreboard.score}. CLICK START TO PLAY AGAIN`);
         document.location.reload();
         clearInterval(countdown);
       }
