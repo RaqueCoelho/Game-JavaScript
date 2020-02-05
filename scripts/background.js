@@ -26,19 +26,5 @@ class Background {
       this.game.context.canvas.width,
       this.game.context.canvas.height
     );
-
-    //white line beggining
-    const whiteRectWidth = 10;
-    this.game.context.fillStyle = 'white';
-    this.game.context.fillRect(40, 0, whiteRectWidth, this.game.context.canvas.height);
-
-    //white line end
-    this.game.context.fillStyle = 'white';
-    this.game.context.fillRect(
-      this.game.context.canvas.width - purpleRectWidth - whiteRectWidth,
-      0,
-      whiteRectWidth,
-      this.game.context.canvas.height
-    );
   }
 }

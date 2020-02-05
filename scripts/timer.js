@@ -15,8 +15,8 @@ class Timer {
       document.getElementById('timer-countdown').textContent = this.timeToLoose;
       if (this.timeToLoose <= 0) {
         this.timeToLoose = 30;
-        this.game.pauseGame();
         alert(`TIMES'S UP. YOUR SCORE IS ${this.game.scoreboard.score}. CLICK START TO PLAY AGAIN`);
+        this.game.pauseGame();
         document.location.reload();
         clearInterval(countdown);
       }

@@ -10,13 +10,9 @@ class Points {
 
   drawpoints() {
     let image = new Image();
-    if (this.randNumber % 3 === 0)
-      image.src =
-        './images/kissclipart-cartoon-alarm-clock-ringing-clipart-alarm-clocks-c-56650bb19378603f.png';
-    else if (this.randNumber % 5 === 0)
-      image.src =
-        './images/kisspng-bell-clip-art-bell-png-vector-element-5aa62d3a4a8459.8830207115208399943052.png';
-    else if (this.randNumber % 2 === 0) image.src = '/images/pngwave.png';
+    if (this.randNumber % 3 === 0) image.src = '/images/water.png';
+    else if (this.randNumber % 5 === 0) image.src = '/images/notification.png';
+    else if (this.randNumber % 2 === 0) image.src = '/images/nightime.png';
     this.game.context.drawImage(image, this.posX, this.posY, this.width, this.height);
   }
 

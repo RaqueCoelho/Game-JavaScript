@@ -12,9 +12,9 @@ class Obstacle {
 
   drawobstacle() {
     let image = new Image();
-    if (this.randNumber % 3 === 0) image.src = './images/hacker-icon.png';
-    else if (this.randNumber % 5 === 0) image.src = './images/beer-cartoon-png-transparent.png';
-    else if (this.randNumber % 2 === 0) image.src = './images/teacher-16030.png';
+    if (this.randNumber % 3 === 0) image.src = './images/sleep.png';
+    else if (this.randNumber % 5 === 0) image.src = './images/beer.png';
+    else if (this.randNumber % 2 === 0) image.src = './images/lamb.png';
     this.game.context.drawImage(image, this.posX, this.posY, this.width, this.height);
   }
 
