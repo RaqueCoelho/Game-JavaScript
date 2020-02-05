@@ -6,19 +6,19 @@ class Timer {
   }
 
   setTimer() {
-    let countdown = setInterval(() => {
-      // console.log('countdown');
+    this.countdown = setInterval(() => {
+      console.log(this.game.scoreBoard.score);
       if (this.game.gameIsRunning) {
         this.timeToLoose--;
       }
-      console.log(this.timeToLoose);
       document.getElementById('timer-countdown').textContent = this.timeToLoose;
+
       if (this.timeToLoose <= 0) {
         this.timeToLoose = 30;
-        alert(`TIMES'S UP. YOUR SCORE IS ${this.game.scoreboard.score}. CLICK START TO PLAY AGAIN`);
+        alert(`TIMES'S UP. YOUR SCORE IS ${this.game.scoreBoard.score}. CLICK START TO PLAY AGAIN`);
         this.game.pauseGame();
         document.location.reload();
-        clearInterval(countdown);
+        clearInterval(this.countdown);
       }
     }, 1000);
   }

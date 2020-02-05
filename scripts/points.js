@@ -10,9 +10,9 @@ class Points {
 
   drawpoints() {
     let image = new Image();
-    if (this.randNumber % 3 === 0) image.src = '/images/water.png';
-    else if (this.randNumber % 5 === 0) image.src = '/images/notification.png';
-    else if (this.randNumber % 2 === 0) image.src = '/images/nightime.png';
+    if (this.randNumber % 3 === 0) image.src = '/images/cassette-tape.png';
+    else if (this.randNumber % 5 === 0) image.src = '/images/bath.png';
+    else if (this.randNumber % 2 === 0) image.src = '/images/clock.png';
     this.game.context.drawImage(image, this.posX, this.posY, this.width, this.height);
   }
 

@@ -19,35 +19,38 @@ class Game {
     this.keyboard.setKeyboard();
     this.obstacles = [];
     this.points = [];
-    this.gameHasStarted = false;
   }
 
   startGame() {
-    if (this.gameHasStarted) {
-      this.restartGame();
-    } else {
-      this.gameIsRunning = true;
-      this.gameHasStarted = true;
-      if (!this.animationID) {
-        this.loop();
-      }
-      sleepMusic.loop = true;
-      sleepMusic.play();
+    //Whenever a game starts, we fist restart every elemtent with this.restartGame()
+    this.restartGame();
+
+    sleepMusic.loop = true;
+    sleepMusic.play();
+
+    //Before runing our loop, we check that the loop is not already running, if the loop is already running we would run a loop over another one (speeding game problem)
+    if (!this.gameIsRunning) {
+      //it the game is not runing let's make it run! We set this.gameIsRunning to the oposite
+      this.gameIsRunning = !this.gameIsRunning;
+      this.loop();
     }
+    // If the game is already runing, the loop should already be running so we just restart the game(first line of this method)
   }
 
   restartGame() {
-    this.gameIsRunning = true;
-
+    //when we restart a game we have to clear the timer's interval so that it is not running on top of the previus one.
+    clearInterval(this.timer.countdown);
     this.timer = new Timer(this);
     this.timer.setTimer();
     //this.timer.timeToLoose = 30;
 
+    //CREATE NEW OBJECTS OF EVERYTHING
     this.doll = new CharacterDoll(this);
     this.keyboard = new Keyboard(this);
     this.scoreBoard = new Scoreboard(this);
     this.scoreBoard.clearScore();
 
+    //RESETS ALL THE GAME LOGIC (since we are not creating a new Game)
     this.obstacles = [];
     this.points = [];
     this.keyboard.setKeyboard();
@@ -64,7 +67,6 @@ class Game {
       this.loop();
     }
     sleepMusic.pause();
-
     //console.log(sleepMusic.paused);
   }
 
