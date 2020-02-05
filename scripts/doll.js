@@ -10,7 +10,7 @@ class CharacterDoll {
   }
 
   moveRight() {
-    if (this.col <= 700) {
+    if (this.col <= 700 - this.width) {
       this.col += 30;
     }
   }
