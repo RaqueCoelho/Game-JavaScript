@@ -7,7 +7,7 @@ class Timer {
 
   setTimer() {
     this.countdown = setInterval(() => {
-      console.log(this.game.scoreBoard.score);
+      // console.log(this.game.scoreBoard.score);
       if (this.game.gameIsRunning) {
         this.timeToLoose--;
       }

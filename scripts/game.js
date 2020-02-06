@@ -21,7 +21,7 @@ class Game {
     this.points = [];
   }
 
-  startGame() {
+  startGame(level) {
     //Whenever a game starts, we fist restart every elemtent with this.restartGame()
     this.restartGame();
 
@@ -32,7 +32,7 @@ class Game {
     if (!this.gameIsRunning) {
       //it the game is not runing let's make it run! We set this.gameIsRunning to the oposite
       this.gameIsRunning = !this.gameIsRunning;
-      this.loop();
+      this.loop(level);
     }
     // If the game is already runing, the loop should already be running so we just restart the game(first line of this method)
   }
@@ -70,21 +70,21 @@ class Game {
     //console.log(sleepMusic.paused);
   }
 
-  fillArrays(timestamp) {
+  fillArrays(level, timestamp) {
     //Everything runnning inside this condition runs at the speed of the game this.speed
     if (this.time < timestamp - this.speed) {
       this.time = timestamp;
       //This pushes an obstacle to the array every this.speed seconds
-      const obstacles = new Obstacle(this, 0);
+      const obstacles = new Obstacle(this, level);
       this.obstacles.push(obstacles);
       //   console.log(this.obstacles.length);
-      const point = new Points(this, 0);
+      const point = new Points(this, level);
       this.points.push(point);
     }
   }
 
-  runLogic(timestamp) {
-    this.fillArrays(timestamp);
+  runLogic(level, timestamp) {
+    this.fillArrays(level, timestamp);
 
     for (let point of this.points) {
       point.runLogic();
@@ -109,11 +109,11 @@ class Game {
     }
   }
 
-  loop = timestamp => {
+  loop = (level, timestamp) => {
     this.drawEverything();
-    this.runLogic(timestamp);
+    this.runLogic(level, timestamp);
     if (this.gameIsRunning) {
-      this.animationID = window.requestAnimationFrame(timestamp => this.loop(timestamp));
+      this.animationID = window.requestAnimationFrame(timestamp => this.loop(level, timestamp));
     }
   };
 }

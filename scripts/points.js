@@ -1,11 +1,14 @@
 class Points {
-  constructor(game, posY) {
+  constructor(game, level) {
     this.game = game;
     this.posX = 100 + Math.random() * (this.game.context.canvas.width - 200) + 5;
-    this.posY = posY;
+    this.posY = 0;
     this.width = 50;
     this.height = 50;
-    this.randNumber = Math.floor(Math.random() * 100);
+    this.randNumber = Math.floor(Math.random() * 1000);
+    if (level === 1) {
+      this.speed = 3;
+    } else this.speed = 6;
   }
 
   drawpoints() {
@@ -17,7 +20,7 @@ class Points {
   }
 
   runLogic() {
-    this.posY += 3;
+    this.posY += this.speed;
     this.checkCollision();
   }
 
