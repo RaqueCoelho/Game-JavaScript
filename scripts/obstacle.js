@@ -8,9 +8,9 @@ class Obstacle {
     this.width = 50;
     this.height = 50;
     this.randNumber = Math.floor(Math.random() * 1000);
-    if (level === 1) {
-      this.speed = 3;
-    } else this.speed = 6;
+    // if (level === 1) {
+    this.speed = 3;
+    // } else this.speed = 6;
   }
 
   drawobstacle() {

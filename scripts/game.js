@@ -1,5 +1,8 @@
 const sleepMusic = new Audio('./Audio/sleep_audio.mp3');
 
+let gameOverImage = new Image();
+gameOverImage.src = './images/game-over (1).png';
+
 class Game {
   constructor($canvas) {
     this.width = $canvas.width;
@@ -9,7 +12,6 @@ class Game {
     this.time = 0;
     this.speed = 1000;
     this.gameIsRunning = false;
-
     this.timer = new Timer(this);
     this.timer.setTimer();
     this.doll = new CharacterDoll(this);
@@ -19,10 +21,22 @@ class Game {
     this.keyboard.setKeyboard();
     this.obstacles = [];
     this.points = [];
+    this.level = 1;
+  }
+
+  clearScreen() {
+    this.context.clearRect(0, 0, this.width, this.height);
+  }
+
+  gameOver() {
+    this.clearScreen();
+    console.log('game over');
+    this.context.drawImage(gameOverImage, 200, 200, 250, 250);
   }
 
   startGame(level) {
     //Whenever a game starts, we fist restart every elemtent with this.restartGame()
+    this.level = level;
     this.restartGame();
 
     sleepMusic.loop = true;
@@ -32,7 +46,7 @@ class Game {
     if (!this.gameIsRunning) {
       //it the game is not runing let's make it run! We set this.gameIsRunning to the oposite
       this.gameIsRunning = !this.gameIsRunning;
-      this.loop(level);
+      this.loop();
     }
     // If the game is already runing, the loop should already be running so we just restart the game(first line of this method)
   }
@@ -61,30 +75,32 @@ class Game {
     if (this.gameIsRunning) {
       this.gameIsRunning = !this.gameIsRunning;
       document.getElementById('pause-button').innerText = 'RESUME';
+      sleepMusic.pause();
     } else {
       this.gameIsRunning = !this.gameIsRunning;
       document.getElementById('pause-button').innerText = 'PAUSE';
       this.loop();
+      sleepMusic.play();
     }
-    sleepMusic.pause();
     //console.log(sleepMusic.paused);
   }
 
-  fillArrays(level, timestamp) {
+  fillArrays(timestamp) {
     //Everything runnning inside this condition runs at the speed of the game this.speed
-    if (this.time < timestamp - this.speed) {
+    //console.log(this.level);
+    if (this.time < timestamp - this.speed / this.level) {
       this.time = timestamp;
       //This pushes an obstacle to the array every this.speed seconds
-      const obstacles = new Obstacle(this, level);
+      const obstacles = new Obstacle(this, this.level);
       this.obstacles.push(obstacles);
       //   console.log(this.obstacles.length);
-      const point = new Points(this, level);
+      const point = new Points(this, this.level);
       this.points.push(point);
     }
   }
 
-  runLogic(level, timestamp) {
-    this.fillArrays(level, timestamp);
+  runLogic(timestamp) {
+    this.fillArrays(timestamp);
 
     for (let point of this.points) {
       point.runLogic();
@@ -109,11 +125,12 @@ class Game {
     }
   }
 
-  loop = (level, timestamp) => {
-    this.drawEverything();
-    this.runLogic(level, timestamp);
+  loop = timestamp => {
+    this.runLogic(timestamp);
+
     if (this.gameIsRunning) {
-      this.animationID = window.requestAnimationFrame(timestamp => this.loop(level, timestamp));
+      this.drawEverything();
+      this.animationID = window.requestAnimationFrame(timestamp => this.loop(timestamp));
     }
   };
 }

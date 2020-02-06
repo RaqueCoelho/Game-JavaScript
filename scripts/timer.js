@@ -11,13 +11,17 @@ class Timer {
       if (this.game.gameIsRunning) {
         this.timeToLoose--;
       }
+
       document.getElementById('timer-countdown').textContent = this.timeToLoose;
 
       if (this.timeToLoose <= 0) {
+        this.game.gameOver();
+
         this.timeToLoose = 30;
-        alert(`TIMES'S UP. YOUR SCORE IS ${this.game.scoreBoard.score}. CLICK START TO PLAY AGAIN`);
+
+        // alert(`TIMES'S UP. YOUR SCORE IS ${this.game.scoreBoard.score}. CLICK LEVEL 1 OR LEVEL 2 TO PLAY AGAIN`);
         this.game.pauseGame();
-        document.location.reload();
+        //document.location.reload();
         clearInterval(this.countdown);
       }
     }, 1000);

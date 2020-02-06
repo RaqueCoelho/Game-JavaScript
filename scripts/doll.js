@@ -7,6 +7,7 @@ class CharacterDoll {
     this.row = 460;
     this.image = new Image();
     this.imageUrl = './images/hiclipart.com.png';
+    this.image.src = this.imageUrl;
   }
 
   moveRight() {
@@ -20,8 +21,8 @@ class CharacterDoll {
       this.col -= 30;
     }
   }
+
   drawDoll() {
-    this.image.src = this.imageUrl;
     this.game.context.drawImage(this.image, this.col, this.row, this.width, this.height);
   }
 }
